@@ -1,0 +1,9 @@
+{
+  "version": "v1",
+  "packages": {
+    "is-ui-library": {
+      "signature": "e6879c92b4097bcc98b219b8a3a9f01c",
+      "file": true
+    }
+  }
+}
