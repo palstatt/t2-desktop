@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
-import { addNotification } from './actions'
+import { addNotification, removeNotification, reqCompanyList } from './actions'
 import { Snack } from 'is-ui-library'
 
 const Container = styled.div`
@@ -25,12 +25,16 @@ class App extends Component {
 		this.setState({ value: '' })
 	}
 
+	componentDidMount() {
+		this.props.fetchData()
+	}
+
 	render() {
 		const { value } = this.state
-		const { messages } = this.props
+		const { messages, onRemoveMessage } = this.props
 		return (
 			<Container>
-				<form onSubmit={this.handleSubmit} autoComplete="off">
+				{/* <form onSubmit={this.handleSubmit} autoComplete="off">
 					<input
 						type="text"
 						name="message"
@@ -38,8 +42,9 @@ class App extends Component {
 						onChange={e => this.setState({ value: e.target.value })}
 					/>
 					<input type="submit" disabled={value === ''} />
-				</form>
-				<Snack messages={messages} />
+				</form> */}
+
+				<Snack messages={messages} removeMessage={id => onRemoveMessage(id)} />
 			</Container>
 		)
 	}
@@ -47,11 +52,15 @@ class App extends Component {
 
 const mapStateToProps = state => {
 	return {
-		messages: state.notifications.messages,
+		messages: state.resources.notifications.messages,
 	}
 }
 
 export default connect(
 	mapStateToProps,
-	{ onSubmitMessage: addNotification }
+	{
+		onSubmitMessage: addNotification,
+		onRemoveMessage: removeNotification,
+		fetchData: reqCompanyList,
+	}
 )(App)
