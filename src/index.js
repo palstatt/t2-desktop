@@ -11,28 +11,31 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import { createEpicMiddleware } from 'redux-observable'
 import { rootEpic } from './epics'
 
-const rootReducer = combineReducers({
-	...reducer,
-	search: searchReducer,
-})
-
 const epicMiddleware = createEpicMiddleware()
 
 const composeEnhancers = composeWithDevTools({})
 
-const enhancer = composeEnhancers(
-	applyMiddleware(epicMiddleware),
-	reduxSearch({
-		resourceIndexes: {
-			companies: ['name', 'description'],
-		},
-		resourceSelector: (resourceName, state) => {
-			return state.businessData.companies[resourceName]
-		},
-	})
-)
+const createAppStore = () => {
+	const finalCreateStore = composeEnhancers(
+		applyMiddleware(epicMiddleware),
+		reduxSearch({
+			resourceIndexes: {
+				companies: ['name', 'description'],
+			},
+			resourceSelector: (resourceName, state) =>
+				state.businessData[resourceName],
+		})
+	)(createStore)
 
-const store = createStore(rootReducer, enhancer)
+	const rootReducer = combineReducers({
+		...reducer,
+		search: searchReducer,
+	})
+
+	return finalCreateStore(rootReducer)
+}
+
+const store = createAppStore()
 
 epicMiddleware.run(rootEpic)
 

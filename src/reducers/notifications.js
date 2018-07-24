@@ -1,3 +1,4 @@
+import { createSelector } from 'reselect'
 import types from '../actions'
 
 const initialState = {
@@ -19,6 +20,16 @@ const notifications = (state = initialState, action) => {
 		default:
 			return state
 	}
+}
+
+// create selectors
+const messages = state => state.notifications.messages
+
+// make memoized business data selector
+export const makeGetNotifications = () => {
+	return createSelector([messages], messages => ({
+		messages,
+	}))
 }
 
 export default notifications

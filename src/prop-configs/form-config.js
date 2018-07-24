@@ -1,15 +1,16 @@
 import React from 'react'
 import { AutocompleteSearch, InputWithValidation } from 'is-ui-library'
 
-export const reportIssueFormConfig = [
+export const reportIssueFormConfig = (options, searchFunction) => [
 	{
 		fieldName: 'company',
-		span: 2,
+		span: 1,
 		component: (
 			<AutocompleteSearch
 				label={'Company'}
+				options={options}
 				placeholder={'Type to search companies'}
-				onSearch={searchFunction}
+				fetchData={searchFunction}
 			/>
 		),
 		defaultValue: '',
@@ -18,20 +19,21 @@ export const reportIssueFormConfig = [
 			rules: [
 				{
 					rule: value => value !== '',
-					failureMessage: 'Field cannot be blank',
+					failureMessage: 'Field is required',
 				},
 			],
-			prompt: 'Field is required',
+			prompt: 'Search for company',
 		},
 	},
 	{
 		fieldName: 'version',
-		span: 2,
+		span: 1,
 		component: (
 			<AutocompleteSearch
 				label={'Version'}
+				options={options}
 				placeholder={'Type to search versions'}
-				onSearch={searchFunction}
+				fetchData={searchFunction}
 			/>
 		),
 		defaultValue: '',
@@ -40,10 +42,10 @@ export const reportIssueFormConfig = [
 			rules: [
 				{
 					rule: value => value !== '',
-					failureMessage: 'Field cannot be blank',
+					failureMessage: 'Field is required',
 				},
 			],
-			prompt: 'Field is required',
+			prompt: 'Search for version number',
 		},
 	},
 	{
@@ -62,10 +64,10 @@ export const reportIssueFormConfig = [
 			rules: [
 				{
 					rule: value => value !== '',
-					failureMessage: 'Field cannot be blank',
+					failureMessage: 'Field is required',
 				},
 			],
-			prompt: 'Field is required',
+			prompt: 'Type issue details',
 		},
 	},
 ]
