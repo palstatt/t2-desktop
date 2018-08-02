@@ -13,5 +13,5 @@ export const addNotification = text => ({
 
 export const removeNotification = id => ({
 	type: types.REMOVE_NOTIFICATION,
-	id,
+	payload: id,
 })

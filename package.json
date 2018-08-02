@@ -4,7 +4,9 @@
   "private": true,
   "dependencies": {
     "is-ui-library": "file:.yalc/is-ui-library",
+    "moment": "^2.22.2",
     "react": "^16.4.1",
+    "react-animate-height": "^2.0.3",
     "react-dom": "^16.4.1",
     "react-redux": "^5.0.7",
     "react-scripts": "1.1.4",
@@ -14,7 +16,7 @@
     "reselect": "^3.0.1",
     "rxjs": "^6.2.1",
     "styled-components": "^3.3.3",
-    "uuid": "^3.3.0"
+    "uuid": "^3.3.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -23,6 +25,7 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
+    "faker": "^4.1.0",
     "redux-devtools-extension": "^2.13.5"
   }
 }

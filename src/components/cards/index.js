@@ -1,1 +1,1 @@
-export { default as UnclaimedCard } from './UnclaimedCard'
+export { default as IssueCard } from './IssueCard'

@@ -1,18 +1,10 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { createSearchAction } from 'redux-search'
 import styled from 'styled-components'
-import { addNotification, removeNotification, reqCompanyList } from './actions'
-import {
-	SnackBar,
-	ButtonForm,
-	Drawer,
-	CardCollection,
-	Columnizer,
-} from 'is-ui-library'
-import { UnclaimedCard } from './components'
-import { makeGetBusinessData, makeGetNotifications } from './reducers'
-import { reportIssueFormConfig, columnizerConfig } from './prop-configs'
+import { connect } from 'react-redux'
+import { IssuesPage, ResolvedPage } from './pages'
+import { makeGetNotifications } from './reducers'
+import { removeNotification, addNotification } from './actions'
+import { SnackBar, colors, shadows } from 'is-ui-library'
 
 const Container = styled.div`
 	display: flex;
@@ -28,55 +20,41 @@ const Container = styled.div`
 	}
 `
 
+const TestButton = styled.div`
+	background: ${colors.black};
+	box-shadow: ${shadows.basic};
+	position: fixed;
+	bottom: 24px;
+	right: 24px;
+	height: 80px;
+	width: 80px;
+	border-radius: 50%;
+	cursor: pointer;
+`
+
 class App extends Component {
-	handleChange = e => {
-		this.setState({ value: e.target.value })
-	}
-
-	handleSubmit = e => {
-		e.preventDefault()
-		this.props.searchCompanies(this.state.value)
-	}
-
-	handleSearch = searchText => {
-		this.props.searchCompanies(searchText)
+	state = {
+		page: 'issues_queue',
 	}
 
 	componentDidMount() {
 		this.props.addMessage('Test notification')
-		this.props.fetchData()
 	}
 
 	render() {
-		const {
-			removeMessage,
-			filteredCompanies,
-			messages,
-			tier2Techs,
-		} = this.props
+		const { page } = this.state
+		const { messages, removeMessage } = this.props
 		return (
 			<Container>
-				<ButtonForm
-					buttonLabel="report issue"
-					formName="test"
-					formFields={reportIssueFormConfig(
-						filteredCompanies,
-						this.handleSearch
-					)}
-				/>
-				<Drawer
-					label={'Tech Status'}
-					centeredHeader
-					collectionComponent={<CardCollection users={tier2Techs} />}
-				/>
-				<Columnizer
-					navItems={columnizerConfig.navItems}
-					pages={columnizerConfig.pages}
-				/>
-				<UnclaimedCard
-					title="Test card"
-					description="This is just a test"
-					companyName="Test Company"
+				{page === 'issues_queue' && <IssuesPage />}
+				{page === 'resolved' && <ResolvedPage />}
+				<TestButton
+					onClick={() =>
+						this.setState(prevState => ({
+							page:
+								prevState.page === 'issues_queue' ? 'resolved' : 'issues_queue',
+						}))
+					}
 				/>
 				<SnackBar messages={messages} removeMessage={removeMessage} />
 			</Container>
@@ -85,18 +63,14 @@ class App extends Component {
 }
 
 const makeMapStateToProps = () => {
-	const getBusinessData = makeGetBusinessData()
 	const getNotifications = makeGetNotifications()
 	const mapStateToProps = (state, props) => ({
-		...getBusinessData(state, props),
 		...getNotifications(state, props),
 	})
 	return mapStateToProps
 }
 
 const actions = {
-	searchCompanies: createSearchAction('companies'),
-	fetchData: reqCompanyList,
 	removeMessage: removeNotification,
 	addMessage: addNotification,
 }

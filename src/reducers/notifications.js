@@ -15,7 +15,9 @@ const notifications = (state = initialState, action) => {
 		case types.REMOVE_NOTIFICATION:
 			return {
 				...state,
-				messages: state.messages.filter(message => message.id !== action.id),
+				messages: state.messages.filter(
+					message => message.id !== action.payload
+				),
 			}
 		default:
 			return state
