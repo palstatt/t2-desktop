@@ -1,6 +1,14 @@
 import React from 'react'
 import { AutocompleteSearch, InputWithValidation } from 'is-ui-library'
 
+export const reportIssueLabelConfig = {
+	default: 'report issue',
+	open: 'report issue',
+	sending: 'reporting issue',
+	complete: 'issue reported',
+	error: 'error reporting issue',
+}
+
 export const reportIssueFormConfig = (options, searchFunction) => [
 	{
 		fieldName: 'company',

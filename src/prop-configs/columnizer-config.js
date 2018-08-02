@@ -1,30 +1,21 @@
+import React from 'react'
+import testCard from './test-cards'
+import { CardCollection } from '../components'
+
+const collectionOne = [testCard(), testCard(), testCard()]
+const collectionTwo = [testCard(), testCard()]
+
 export const columnizerConfig = {
-	navItems: [
+	pages: [
 		{
 			id: 'queue',
 			name: 'queue',
-		},
-		{
-			id: 'pending',
-			name: 'pending',
+			component: <CardCollection collection={collectionOne} />,
 		},
 		{
 			id: 'in_progress',
 			name: 'in progress',
-		},
-	],
-	pages: [
-		{
-			id: 'queue',
-			// component: <TestComponent />,
-		},
-		{
-			id: 'pending',
-			// component: <TestComponent />,
-		},
-		{
-			id: 'in_progress',
-			// component: <TestComponent />,
+			component: <CardCollection collection={collectionTwo} />,
 		},
 	],
 }
