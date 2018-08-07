@@ -8,7 +8,7 @@ import {
 	Drawer,
 	CardCollection,
 	Columnizer,
-	OptionDropdown,
+	QuickSwitch,
 } from 'is-ui-library'
 import { makeGetBusinessData } from '../reducers'
 import {
@@ -74,7 +74,7 @@ class IssuesPage extends Component {
 						)}
 						onSubmit={this.handleSubmit}
 					/>
-					<OptionDropdown
+					<QuickSwitch
 						label="change status"
 						theme="default"
 						options={dropdownOptions}

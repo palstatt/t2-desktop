@@ -27,7 +27,11 @@ const businessData = (state = initialState, action) => {
 			return {
 				...state,
 				fetching: false,
-				companies: action.payload,
+				companies: action.payload.map(({ id, title, body }) => ({
+					id,
+					name: title,
+					description: body,
+				})),
 			}
 		default:
 			return state
