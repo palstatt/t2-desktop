@@ -1,14 +1,15 @@
 import notifications from './notifications'
 import businessData from './business-data'
-import currentUser from './current-user'
+import userData from './user-data'
 
 export * from './business-data'
 export * from './notifications'
+export * from './user-data'
 
 const reducer = {
 	notifications,
 	businessData,
-	currentUser,
+	userData,
 }
 
 export default reducer

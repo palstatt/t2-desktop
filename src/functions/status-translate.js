@@ -1,4 +1,4 @@
-﻿export const statuses = [
+export const statuses = [
 	{
 		id: 5,
 		name: 'desk',
@@ -57,8 +57,6 @@
 	},
 ]
 
-const getStatusName = (id) => (
-    statuses.find(status => status.id === id).name
-)
+const getStatusName = id => statuses.find(status => status.id === id).name
 
 export default getStatusName

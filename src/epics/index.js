@@ -26,4 +26,15 @@ const reqCompanyListEpic = action$ =>
 		)
 	)
 
-export const rootEpic = combineEpics(addNotificationEpic, reqCompanyListEpic)
+const reqChangeStatus = action$ =>
+	action$.pipe(
+		ofType(types.REQ_CHANGE_STATUS),
+		tap(() => actions.storeChangeStatus()),
+		ignoreElements()
+	)
+
+export const rootEpic = combineEpics(
+	addNotificationEpic,
+	reqCompanyListEpic,
+	reqChangeStatus
+)

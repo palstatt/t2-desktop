@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 import { createSearchAction } from 'redux-search'
-import { reqCompanyList } from '../actions'
+import { reqCompanyList, reqChangeStatus, addNotification } from '../actions'
 import {
 	ButtonForm,
 	Drawer,
@@ -10,29 +10,24 @@ import {
 	Columnizer,
 	QuickSwitch,
 } from 'is-ui-library'
-import { makeGetBusinessData } from '../reducers'
+import { makeGetBusinessData, makeGetUserData } from '../reducers'
 import {
 	reportIssueFormConfig,
 	reportIssueLabelConfig,
 	columnizerConfig,
 } from '../prop-configs'
+import { statuses, getColor, getTheme, getStatusName } from '../functions'
 
 const ButtonContainer = styled.div`
 	display: grid;
 	grid-gap: 16px;
 `
 
-const dropdownOptions = [
-	{
-		label: 'Available',
-	},
-	{
-		label: 'Busy',
-	},
-	{
-		label: 'At lunch',
-	},
-]
+const dropdownOptions = statuses.map(({ id, name }) => ({
+	id,
+	label: name,
+	activeColor: getColor(id),
+}))
 
 class IssuesPage extends Component {
 	handleChange = e => {
@@ -61,10 +56,25 @@ class IssuesPage extends Component {
 	}
 
 	render() {
-		const { filteredCompanies, tier2Techs } = this.props
+		const {
+			filteredCompanies,
+			tier2Techs,
+			currentUser,
+			changeStatus,
+			addMessage,
+		} = this.props
 		return (
 			<Fragment>
 				<ButtonContainer>
+					<QuickSwitch
+						label={getStatusName(currentUser.statusId)}
+						theme={getTheme(currentUser.statusId)}
+						columns={2}
+						options={dropdownOptions}
+						onSelectOption={({ id }) => changeStatus(id)}
+						alignOptions={'center'}
+						large
+					/>
 					<ButtonForm
 						buttonLabel={reportIssueLabelConfig}
 						formName="report_issue"
@@ -73,12 +83,10 @@ class IssuesPage extends Component {
 							this.handleSearch
 						)}
 						onSubmit={this.handleSubmit}
-					/>
-					<QuickSwitch
-						label="change status"
-						theme="default"
-						options={dropdownOptions}
-						large
+						onComplete={() => addMessage('Your issue was submitted!')}
+						onError={() =>
+							addMessage('Sorry...there was a problem submitting your issue')
+						}
 					/>
 				</ButtonContainer>
 				<Drawer
@@ -98,8 +106,10 @@ class IssuesPage extends Component {
 
 const makeMapStateToProps = () => {
 	const getBusinessData = makeGetBusinessData()
+	const getUserData = makeGetUserData()
 	const mapStateToProps = (state, props) => ({
 		...getBusinessData(state, props),
+		...getUserData(state, props),
 	})
 	return mapStateToProps
 }
@@ -107,6 +117,8 @@ const makeMapStateToProps = () => {
 const actions = {
 	searchCompanies: createSearchAction('companies'),
 	fetchData: reqCompanyList,
+	changeStatus: reqChangeStatus,
+	addMessage: addNotification,
 }
 
 export default connect(

@@ -9,7 +9,7 @@ const initialState = {
 		name: faker.name.findName(),
 		statusId: 5,
 	},
-	fetching: false,
+	fetchingUserData: false,
 }
 
 const userData = (state = initialState, action) => {
@@ -17,13 +17,27 @@ const userData = (state = initialState, action) => {
 		case types.REQ_CURRENT_USER_DATA:
 			return {
 				...state,
-				fetching: true,
+				fetchingUserData: true,
 			}
 		case types.STORE_CURRENT_USER_DATA:
 			return {
 				...state,
 				currentUser: action.payload,
-				fetching: false,
+				fetchingUserData: false,
+			}
+		case types.REQ_CHANGE_STATUS:
+			return {
+				...state,
+				currentUser: {
+					...state.currentUser,
+					statusId: action.payload,
+				},
+				fetchingUserData: true,
+			}
+		case types.STORE_CHANGE_STATUS:
+			return {
+				...state,
+				fetchingUserData: false,
 			}
 		default:
 			return state
@@ -31,13 +45,16 @@ const userData = (state = initialState, action) => {
 }
 
 const currentUser = state => state.userData.currentUser
-const fetching = state => state.userData.fetching
+const fetchingUserData = state => state.userData.fetchingUserData
 
 export const makeGetUserData = () => {
-	return createSelector([currentUser, fetching], currentUser, fetching => ({
-		currentUser,
-		fetching,
-	}))
+	return createSelector(
+		[currentUser, fetchingUserData],
+		(currentUser, fetchingUserData) => ({
+			currentUser,
+			fetchingUserData,
+		})
+	)
 }
 
 export default userData
