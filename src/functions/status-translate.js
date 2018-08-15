@@ -1,7 +1,7 @@
 export const statuses = [
 	{
 		id: 5,
-		name: 'desk',
+		name: 'at desk',
 	},
 	{
 		id: 1,
@@ -13,43 +13,43 @@ export const statuses = [
 	},
 	{
 		id: 16,
-		name: 'mountain pacific',
+		name: '@ mountain pacific',
 	},
 	{
 		id: 17,
-		name: 'central',
+		name: '@ central',
 	},
 	{
 		id: 18,
-		name: 'eastern',
+		name: '@ eastern',
 	},
 	{
 		id: 15,
-		name: 'data migration',
+		name: '@ data migration',
 	},
 	{
 		id: 19,
-		name: 'dev room',
+		name: '@ dev room',
 	},
 	{
 		id: 20,
-		name: 'implementation',
+		name: '@ implementation',
 	},
 	{
 		id: 22,
-		name: 'custom mappings',
+		name: '@ custom mappings',
 	},
 	{
 		id: 3,
-		name: 'break',
+		name: 'on break',
 	},
 	{
 		id: 2,
-		name: 'lunch',
+		name: 'at lunch',
 	},
 	{
 		id: 4,
-		name: 'meeting',
+		name: 'in meeting',
 	},
 	{
 		id: 6,

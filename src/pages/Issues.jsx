@@ -73,6 +73,7 @@ class IssuesPage extends Component {
 						options={dropdownOptions}
 						onSelectOption={({ id }) => changeStatus(id)}
 						alignOptions={'center'}
+						prompt={`I'm currently...`}
 						large
 					/>
 					<ButtonForm
