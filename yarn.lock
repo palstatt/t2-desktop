@@ -3817,11 +3817,7 @@ is-typedarray@~1.0.0:
   resolved "https://registry.yarnpkg.com/is-typedarray/-/is-typedarray-1.0.0.tgz#e479c80858df0c1b11ddda6940f96011fcda4a9a"
 
 "is-ui-library@file:.yalc/is-ui-library":
-<<<<<<< HEAD
   version "1.0.12-eabeb0ba"
-=======
-  version "1.0.12-f8e5d40c"
->>>>>>> 4dfde19f259988f3e7e632eecafa10a14666ba18
   dependencies:
     aphrodite "^2.2.2"
     immutability-helper "^2.7.1"
