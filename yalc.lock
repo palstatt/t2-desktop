@@ -2,7 +2,8 @@
   "version": "v1",
   "packages": {
     "is-ui-library": {
-      "signature": "7a4972f779ba1704612a1398c78634cb"
+      "signature": "6d404608dc45a8b1420df19495217016",
+      "file": true
     }
   }
 }
