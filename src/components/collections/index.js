@@ -1,1 +1,1 @@
-export { default as CardCollection } from './CardCollection'
+export { default as IssueCardCollection } from './CardCollection'
