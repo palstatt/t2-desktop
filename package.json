@@ -6,10 +6,10 @@
     "@atlaskit/css-reset": "^3.0.1",
     "is-ui-library": "file:.yalc/is-ui-library",
     "moment": "^2.22.2",
-    "react": "^16.4.1",
+    "react": "^16.8.0-alpha.0",
     "react-animate-height": "^2.0.3",
     "react-dates": "^17.2.0",
-    "react-dom": "^16.4.1",
+    "react-dom": "^16.8.0-alpha.0",
     "react-redux": "^5.0.7",
     "react-scripts": "2.0.3",
     "redux": "^4.0.0",
@@ -17,7 +17,6 @@
     "redux-search": "^2.4.1",
     "reselect": "^3.0.1",
     "rxjs": "^6.2.1",
-    "styled-components": "^4.0.0-beta.1",
     "uuid": "^3.3.2"
   },
   "scripts": {

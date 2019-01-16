@@ -7,9 +7,9 @@ export * from './notifications'
 export * from './user-data'
 
 const reducer = {
-	notifications,
-	businessData,
-	userData,
+  notifications,
+  businessData,
+  userData,
 }
 
 export default reducer

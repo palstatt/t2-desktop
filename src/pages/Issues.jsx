@@ -11,7 +11,7 @@ import {
   columnizerConfig,
 } from '../prop-configs'
 import { statuses, getColor, getTheme, getStatusName } from '../functions'
-import { IssueCardCollection, focusable } from '../components'
+import { IssueCardCollection, FocusableComponent } from '../components'
 
 const ButtonContainer = styled.div`
   display: grid;
@@ -23,8 +23,6 @@ const dropdownOptions = statuses.map(({ id, name }) => ({
   label: name,
   activeColor: getColor(id),
 }))
-
-const QuickSwitchFocusable = focusable(QuickSwitch)
 
 class IssuesPage extends Component {
   handleChange = e => {
@@ -63,7 +61,7 @@ class IssuesPage extends Component {
     return (
       <Fragment>
         <ButtonContainer>
-          <QuickSwitchFocusable
+          <QuickSwitch
             label={getStatusName(currentUser.statusId)}
             theme={getTheme(currentUser.statusId)}
             columns={2}
@@ -87,6 +85,7 @@ class IssuesPage extends Component {
             }
           />
         </ButtonContainer>
+
         <Drawer
           label={'Tech Status'}
           centeredHeader
